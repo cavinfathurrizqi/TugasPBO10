@@ -1,1 +1,27 @@
 # TugasPBO10
+
+Koneksi IReport, Jasper, File CSV dan JFrame Form Netbeans dengan PostgreSQL serta Exception Java di Netbeans.
+# JASPER REPORT NEATBEANS
+JasperReports adalah sebuah library open-source berbasis Java yang berfungsi sebagai mesin pelaporan (reporting engine). JasperReports digunakan untuk membuat berbagai jenis laporan seperti faktur, slip gaji, laporan keuangan, atau rekap data pegawai dan mahasiswa. Library ini mampu mengambil data dari berbagai sumber, seperti database, file XML, JavaBeans, CSV, atau JSON, kemudian mengolahnya menjadi laporan yang dapat diekspor ke berbagai format, seperti PDF, Excel, HTML, CSV, dan DOCX.
+# BUTTON UPLOAD 
+  Tombol Upload berfungsi untuk mengimpor data dari file CSV ke dalam database aplikasi.
+Ketika tombol ini diklik, program akan menampilkan jendela pemilih file menggunakan JFileChooser, sehingga pengguna dapat memilih file CSV yang berisi data hewan. Setelah file dipilih, sistem akan membaca isi file secara baris demi baris menggunakan BufferedReader dan memisahkan data berdasarkan tanda pemisah semicolon (;).
+Setiap data yang dibaca akan dibersihkan dari karakter aneh atau tersembunyi menggunakan perintah replaceAll("[^\\x20-\\x7E]", "").trim() agar tidak muncul simbol atau kotak pada hasil laporan. Data yang sudah bersih kemudian dimasukkan ke dalam database melalui perintah SQL INSERT dengan kolom id_hewan, nama_hewan, jenis_hewan, dan harga. Jika proses berhasil, program akan menampilkan pesan “Upload selesai!”, sedangkan apabila terjadi kesalahan, seperti format data tidak sesuai atau file tidak ditemukan, sistem akan menampilkan pesan error melalui JOptionPane.
+Fitur tombol Upload ini memudahkan pengguna untuk memasukkan data secara massal tanpa harus menambah satu per satu secara manual, sehingga lebih efisien dan mengurangi kemungkinan kesalahan input.
+# MENAMBAHKAN CSV KE NEATBEANS
+  Menambahkan file CSV ke dalam proyek NetBeans bertujuan agar file tersebut dapat diakses langsung oleh program Java saat proses pembacaan data atau upload ke database. Proses ini dilakukan agar file CSV berada di dalam struktur proyek dan mudah diatur bersama file lain seperti kelas Java dan resource aplikasi.
+Langkah-langkah menambahkan file CSV ke NetBeans adalah sebagai berikut. Pertama, buka proyek yang sedang dikerjakan di NetBeans. Kemudian, pada jendela Projects, klik kanan pada folder tempat file akan disimpan, misalnya folder src, resources, atau folder khusus seperti data. Pilih menu New → Other → Other → Empty File, lalu beri nama file dengan ekstensi .csv (misalnya Petville.csv). Setelah file dibuat, isi data ke dalam file tersebut menggunakan format CSV dengan pemisah semicolon (;) atau koma (,) sesuai kebutuhan program.
+Alternatifnya, jika file CSV sudah ada sebelumnya di komputer, pengguna dapat menambahkannya dengan cara klik kanan pada folder proyek → Upload/Add Existing Item → pilih file CSV dari komputer → Open. Setelah file masuk ke dalam proyek, file tersebut dapat diakses oleh program menggunakan path relatif, misalnya src/pertemuan10/Petville.csv.
+Dengan menambahkan file CSV ke dalam proyek NetBeans, program dapat membaca data secara langsung dari file tersebut tanpa perlu mencari lokasi eksternal di komputer. Cara ini juga memudahkan dalam proses distribusi atau pengujian aplikasi, karena seluruh data pendukung sudah tersimpan rapi di dalam proyek yang sama.
+# Langkah-langkah mengupload file csv
+1. Siapkan Database di PostgreSQL
+2. Hubungkan Database ke NetBeans
+3. Tambahkan Library, Klik kanan pada Libraries → Add Library → pilih PostgreSQL JDBC Driver, Klik kanan lagi → Add JAR/Folder → tambahkan semua file library JasperReports (biasanya jasperreports-x.x.x.jar dan dependensinya).
+4. Tambahkan Plugin iReport ke NetBeans, Buka Tools → Plugins → Downloaded → Add Plugin, Pilih file .nbm plugin iReport (biasanya dari folder hasil ekstraksi iReport), Klik Open → Install → Finish.
+5. Buat Report Baru. Klik kanan pada package project → New → Report Wizard. Pilih ukuran kertas (A4 atau Letter) → Next. Beri nama file, misalnya laporanHewan.jrxml → Next. Buat New Data Source → Database JDBC Connection. Pilih koneksi PostgreSQL yang sudah dibuat. Klik Test dan Save. Pilih tabel dan pindahkan semua field ke kanan → Next → Finish.
+6. Desain Laporan di iReport Designer. Buka file .jrxml yang baru dibuat. Atur layout (header, detail, footer). Tambahkan: Text Field untuk nama kolom. Image jika ingin menampilkan logo. Title dan tanggal laporan di bagian header. Simpan laporan → otomatis menghasilkan file .jasper.
+7. Integrasi JasperReport ke JFrame. Tambahkan tombol “Cetak” di JFrame.
+8. Tambahkan tombol “Upload” di JFrame.
+9. Buka Microsoft Excel. Jalankan aplikasi Microsoft Excel seperti biasa.Pilih Blank Workbook (Buku Kerja Kosong). Masukkan Data ke Dalam Kolom, Isi data seperti tabel biasa (Sesuai urutan database). Pastikan Tidak Ada Formula atau Format Tambahan. CSV hanya menyimpan teks murni (tanpa warna, border, atau formula Excel), Jadi pastikan datanya sederhana dan bersih. Simpan Sebagai CSV, Klik menu File → Save As (atau tekan F12). Pilih lokasi penyimpanan (misalnya Desktop). Pada Save as type, pilih: CSV UTF 8 (Comma delimited)  Ketik nama file, misalnya Petville.csv. Klik Save (Simpan).
+10. Coba Jalankan Aplikasi. Klik tombol Upload CSV, pilih file .csv, lalu pastikan muncul pesan “Upload selesai!”.
+11. Jalankan dan Cetak. Jalankan aplikasi. Klik tombol Cetak di JFrame → laporan akan muncul di Jasper Viewer. Kamu bisa menyimpan hasilnya ke PDF, Excel, atau DOCX.
